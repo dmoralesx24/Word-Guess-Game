@@ -51,3 +51,12 @@ h3 {
     margin-top: 40px;
     margin-right: 350px;
 }
+
+ @media screen and (max-width: 790px) {
+     .box1 {
+         margin-left: 200px;
+     }
+     .box2 {
+        margin-right: 200px;
+     }
+ }

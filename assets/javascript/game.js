@@ -8,15 +8,13 @@ var chosenTeam = nbaTeams[randomTeam];
 var rightWord = [];
 var wrongWord = [];
 var underLine = [];
+var numOfTries = 12;
 
 // Dom Manipulation
 var docUnderLine = document.getElementsByClassName("underscore");
 var docRightGuess = document.getElementsByClassName("rightGuess");
 var docWrongGuess = document.getElementsByClassName("wrongGuess");
 var docNumber = document.getElementsByClassName("attempts");
-
-// testing
-console.log(chosenTeam);
 
 // making lines the length of the team name
 let underscore = () => {
@@ -37,13 +35,20 @@ document.addEventListener("keypress", (event) => {
      docUnderLine[0].innerHTML = underLine.join(" ");
      docRightGuess[0].innerHTML = rightWord;
         if(underLine.join("") === chosenTeam) {
-            alert("YOU WIN!");
+            alert("YOU WIN! :D");
         }
      //  if user guesses wrong
     } else {
       wrongWord.push(keyword);
       docWrongGuess[0].innerHTML = wrongWord;
+      numOfTries--;
+      docNumber[0].innerHTML = numOfTries;
+       if(numOfTries === 0) {
+        alert("You Lost! :(");
+       }
+
      }
 });  
+ 
 
 docUnderLine[0].innerHTML = underscore().join(" "); 
