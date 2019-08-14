@@ -1,11 +1,13 @@
 body {
-    background: url("../images/nbawallpaper.jpg");
+    background-image: url(../images/nbawallpaper.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .container {
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    
 }
 
 h1 {
@@ -40,23 +42,69 @@ h3 {
 }
 
 .box2 {
+    height: auto;
     float: right;
     border: 5px;
     border-style: dashed;
     border-color: white;
     text-align: center;
     color: white;
-    padding-bottom: 400px;
+    padding-bottom: 115px;
+    margin-bottom: 100px; 
     width: 250px;
     margin-top: 40px;
     margin-right: 350px;
+    border-spacing: 400px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 1235px) {
+
+
+    .box1{
+      margin-left: 148px;
+      margin-bottom: 100px;
+    }
+    .box2 {
+        margin-bottom: 100px;
+        margin-right: 100px;
+    }
 }
 
  @media screen and (max-width: 790px) {
      .box1 {
-         margin-left: 200px;
+        margin-bottom: 100px;
+        margin-left: 20px;
+        
      }
+
      .box2 {
-        margin-right: 200px;
+        margin-bottom: 100px;
+        margin-right: 84px;
      }
  }
+
+ @media screen and (max-width: 640px) {
+    .box1 {
+        margin-bottom: 100px;
+        margin-left: 5px;
+        width: 180px;
+        
+     }
+
+     .box2 {
+        margin-bottom: 100px;
+        margin-right: 20px;
+     }
+
+  }

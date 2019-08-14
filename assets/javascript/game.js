@@ -2,53 +2,99 @@
 // nba teams array
 var nbaTeams = ["hawks", "celtics", "nets", "hornets", "bulls", "cavaliers", "mavericks", "nuggets", "pistons", "warriors", "rockets", "pacers", "clippers", "lakers", "grizzlies", "heat", "bucks", "timberwolves", "pelicans", "knicks", "thunder", "magic", "sixers", "blazers", "kings", "spurs", "raptors", "jazz"];
 
-// random team picked 
-var randomTeam = Math.floor(Math.random() * nbaTeams.length);
-var chosenTeam = nbaTeams[randomTeam];
-var rightWord = [];
-var wrongWord = [];
-var underLine = [];
+// Data holder for the game
+var selectedWord = "";
+var lettersInWord  = [];
+var numBlanks = 0; 
+var wrongLetters= [];
+var blankAndSuccesses = [];
+
+// Game Counters
 var numOfTries = 12;
+var winCount = 0;
+var loseCount = 0;
 
-// Dom Manipulation
-var docUnderLine = document.getElementsByClassName("underscore");
-var docRightGuess = document.getElementsByClassName("rightGuess");
-var docWrongGuess = document.getElementsByClassName("wrongGuess");
-var docNumber = document.getElementsByClassName("attempts");
+// Dom Manipulati
 
-// making lines the length of the team name
-let underscore = () => {
-    for(var i = 0; i < chosenTeam.length; i++) {
-        underLine.push("_");
+
+
+// the start of the game functionality 
+function startGame() {
+
+    selectedWord = nbaTeams[Math.floor(Math.random() * nbaTeams.length)];
+    lettersInWord = selectedWord.split("");
+    numBlanks = lettersInWord.length;
+
+    numOfTries = 12;
+    wrongLetters = [];
+    blankAndSuccesses = [];
+
+    for(var i = 0; i < numBlanks; i++) {
+        blankAndSuccesses.push("_");
+    };
+
+    document.getElementById("underscore").innerHTML = blankAndSuccesses.join(" ");
+    document.getElementById("attempts").innerHTML = numOfTries;
+    document.getElementById("wins").innerHTML = winCount;
+    document.getElementById("losses").innerHTML = loseCount;
+};
+
+function checkLetters(letter) {
+
+    var isLetterInWord = false;
+
+    for(var i = 0; i < numBlanks; i++) {
+        if(selectedWord[i] == letter) {
+            isLetterInWord = true;
+        }
     }
-    return underLine; 
+    
+    if(isLetterInWord) {
+     for(var i = 0; i < numBlanks; i++) {
+        if(selectedWord[i] == letter) {
+            blankAndSuccesses[i] = letter;
+        };
+     };
+    }
+    else {
+     wrongLetters.push(letter);
+     numOfTries--
+    };
+};
+
+function roundComplete() {
+
+    document.getElementById("attempts").innerHTML = numOfTries;
+    var answer = document.getElementById("underscore").innerHTML = blankAndSuccesses.join(" ");
+    document.getElementById("wrongGuess").innerHTML = wrongLetters.join(" ");
+
+    if(lettersInWord.toString() == blankAndSuccesses.toString()) {
+        winCount++;
+        alert(`You WON!! Answer: ${answer}`);
+
+        document.getElementById("wins").innerHTML = winCount;
+
+        startGame();
+    }
+    else if(numOfTries == 0){
+        loseCount++;
+        alert(`You Lost :(`);
+
+        document.getElementById("losses").innerHTML = loseCount;
+
+        startGame();
+    }
 }
 
-//users guess 
-document.addEventListener("keypress", (event) => {
 
-    var keyword = String.fromCharCode(event.keyCode);
-    if(chosenTeam.indexOf(keyword) > -1) {
-     // if user guesses right 
-     rightWord.push(keyword);
-     underLine[chosenTeam.indexOf(keyword)] = keyword;
-     docUnderLine[0].innerHTML = underLine.join(" ");
-     docRightGuess[0].innerHTML = rightWord;
-        if(underLine.join("") === chosenTeam) {
-            alert("YOU WIN! :D");
-        }
-     //  if user guesses wrong
-    } else {
-      wrongWord.push(keyword);
-      docWrongGuess[0].innerHTML = wrongWord;
-      numOfTries--;
-      docNumber[0].innerHTML = numOfTries;
-       if(numOfTries === 0) {
-        alert("You Lost! :(");
-       }
 
-     }
-});  
- 
+startGame();
 
-docUnderLine[0].innerHTML = underscore().join(" "); 
+document.onkeyup = function(event) {
+    var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+    checkLetters(letterGuessed);
+    roundComplete();
+};
+
+
+
