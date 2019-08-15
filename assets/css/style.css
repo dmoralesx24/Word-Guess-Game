@@ -28,6 +28,32 @@ h3 {
     font-weight: bold;
 }
 
+p {
+    font-weight: bold;
+}
+
+#wins, #losses {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#underscore {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#wrongGuess {
+    color: red;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#attempts{
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 25px;
+}
+
 .box1 {
     float: left;
     border: 5px;
@@ -95,6 +121,12 @@ h3 {
  }
 
  @media screen and (max-width: 640px) {
+    body {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+    }
+    
     .box1 {
         margin-bottom: 100px;
         margin-left: 5px;
@@ -104,7 +136,8 @@ h3 {
 
      .box2 {
         margin-bottom: 100px;
-        margin-right: 20px;
+        margin-right: 30px;
+        width: 200px;
      }
 
-  }
+}
